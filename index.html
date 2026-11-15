@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RLP Game</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#002519;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#00452d;
+ padding:20px 12px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:2px solid gold;
+}
+.logo{color:gold;font-size:27px;font-weight:bold}
+.balance{
+ background:#006b3e;
+ padding:12px;
+ border-radius:25px;
+}
+.banner{
+ margin:15px;
+ padding:35px 12px;
+ text-align:center;
+ background:linear-gradient(130deg,#087c43,#003b29);
+ border:2px solid gold;
+ border-radius:18px;
+}
+h1{color:#ffd34d}
+h2{color:#ffcf59;margin:22px 15px}
+.games{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ padding:12px;
+}
+.game{
+ background:#07583e;
+ border:1px solid gold;
+ border-radius:14px;
+ padding:25px 8px;
+ text-align:center;
+ font-size:19px;
+}
+button{
+ background:linear-gradient(#ffe46a,#e9a900);
+ border:0;
+ border-radius:20px;
+ padding:10px 20px;
+ font-weight:bold;
+}
+.bonus{
+ margin:15px;
+ padding:20px;
+ background:#07583e;
+ border-radius:15px;
+ text-align:center;
+}
+footer{
+ position:fixed;
+ bottom:0;
+ width:100%;
+ background:#004c35;
+ display:flex;
+ justify-content:space-around;
+ padding:17px 3px;
+ border-top:2px solid gold;
+}
+footer span{font-size:13px}
+main{padding-bottom:90px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">👑 RLP GAME</div>
+ <div class="balance">🪙 <span id="points">1000</span> PTS</div>
+</header>
+<main>
+ <div class="banner">
+  <h1>DAILY MISSIONS!</h1>
+  <h3>Welcome to RLP Game</h3>
+  <p>Play • Enjoy • Collect Points</p>
+ </div>
+ <h2>🔥 Popular Games</h2>
+ <div class="games">
+  <div class="game">🎲<p>LUDO</p><button onclick="alert('Ludo demo coming soon!')">Play</button></div>
+  <div class="game">🏏<p>CRICKET</p><button onclick="alert('Cricket demo coming soon!')">Play</button></div>
+  <div class="game">💎<p>JEWEL</p><button onclick="alert('Jewel demo coming soon!')">Play</button></div>
+  <div class="game">🧠<p>QUIZ</p><button onclick="alert('Quiz demo coming soon!')">Play</button></div>
+ </div>
+ <h2>🎁 Daily Bonus</h2>
+ <div class="bonus">
+  <h3>Collect Your Free Points</h3>
+  <button onclick="bonus()">Claim 50 Points</button>
+  <p id="message">Free virtual points only</p>
+ </div>
+</main>
+<footer>
+ <span>🏠 Home</span>
+ <span>🎁 Bonus</span>
+ <span>🎮 Games</span>
+ <span>👤 Profile</span>
+</footer>
+<script>
+function bonus(){
+ let p=Number(document.getElementById('points').innerText);
+ if(localStorage.getItem('rlpBonus')===new Date().toDateString()){
+  document.getElementById('message').innerText='Bonus already collected today!';
+  return;
+ }
+ p+=50;
+ document.getElementById('points').innerText=p;
+ localStorage.setItem('rlpBonus',new Date().toDateString());
+ document.getElementById('message').innerText='50 points collected!';
+}
+</script>
+</body>
+</html>
