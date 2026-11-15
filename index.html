@@ -1,126 +1,157 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RLP Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RLP GAME</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- background:#002519;
- color:white;
- font-family:Arial,sans-serif;
-}
-header{
- background:#00452d;
- padding:20px 12px;
- display:flex;
- justify-content:space-between;
- align-items:center;
- border-bottom:2px solid gold;
-}
-.logo{color:gold;font-size:27px;font-weight:bold}
-.balance{
- background:#006b3e;
- padding:12px;
- border-radius:25px;
-}
-.banner{
- margin:15px;
- padding:35px 12px;
- text-align:center;
- background:linear-gradient(130deg,#087c43,#003b29);
- border:2px solid gold;
- border-radius:18px;
-}
-h1{color:#ffd34d}
-h2{color:#ffcf59;margin:22px 15px}
-.games{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
- padding:12px;
-}
-.game{
- background:#07583e;
- border:1px solid gold;
- border-radius:14px;
- padding:25px 8px;
- text-align:center;
- font-size:19px;
-}
-button{
- background:linear-gradient(#ffe46a,#e9a900);
- border:0;
- border-radius:20px;
- padding:10px 20px;
- font-weight:bold;
-}
-.bonus{
- margin:15px;
- padding:20px;
- background:#07583e;
- border-radius:15px;
- text-align:center;
-}
-footer{
- position:fixed;
- bottom:0;
- width:100%;
- background:#004c35;
- display:flex;
- justify-content:space-around;
- padding:17px 3px;
- border-top:2px solid gold;
-}
-footer span{font-size:13px}
-main{padding-bottom:90px}
+body{margin:0;background:#002519;color:white;font-family:Arial,sans-serif}
+header{background:#00452d;padding:20px;color:#ffdc27;font-size:27px;font-weight:bold;display:flex;justify-content:space-between;align-items:center}
+.points{background:#006b46;color:white;padding:12px;border-radius:30px;font-size:16px}
+.hero{text-align:center;margin:20px;padding:35px 10px;border:3px solid #ffdc27;border-radius:25px;background:#00623e}
+.hero h1{color:#ffdc27}
+h2{color:#ffd45a;margin:25px}
+.card{background:#07583f;border:2px solid #e9d21b;border-radius:20px;margin:20px;padding:25px;text-align:center}
+button{background:linear-gradient(#ffe66a,#f3b900);border:0;border-radius:30px;padding:14px 25px;font-size:17px;font-weight:bold;margin:8px;cursor:pointer}
+.option{display:block;width:100%;background:#08704c;color:white;border:2px solid #d8bd27;border-radius:12px;margin:12px 0;padding:15px}
+.option:disabled{opacity:.8}
+#quiz{display:none}
+nav{position:fixed;bottom:0;left:0;width:100%;background:#00452d;border-top:3px solid #f8d600;display:flex;justify-content:space-around;padding:17px 2px}
+nav a{color:white;text-decoration:none;font-size:15px}
+footer{height:75px}
 </style>
 </head>
 <body>
+
 <header>
- <div class="logo">👑 RLP GAME</div>
- <div class="balance">🪙 <span id="points">1000</span> PTS</div>
+👑 RLP GAME
+<span class="points">🪙 <span id="points">1000</span> PTS</span>
 </header>
-<main>
- <div class="banner">
-  <h1>DAILY MISSIONS!</h1>
-  <h3>Welcome to RLP Game</h3>
-  <p>Play • Enjoy • Collect Points</p>
- </div>
- <h2>🔥 Popular Games</h2>
- <div class="games">
-  <div class="game">🎲<p>LUDO</p><button onclick="alert('Ludo demo coming soon!')">Play</button></div>
-  <div class="game">🏏<p>CRICKET</p><button onclick="alert('Cricket demo coming soon!')">Play</button></div>
-  <div class="game">💎<p>JEWEL</p><button onclick="alert('Jewel demo coming soon!')">Play</button></div>
-  <div class="game">🧠<p>QUIZ</p><button onclick="alert('Quiz demo coming soon!')">Play</button></div>
- </div>
- <h2>🎁 Daily Bonus</h2>
- <div class="bonus">
-  <h3>Collect Your Free Points</h3>
-  <button onclick="bonus()">Claim 50 Points</button>
-  <p id="message">Free virtual points only</p>
- </div>
-</main>
-<footer>
- <span>🏠 Home</span>
- <span>🎁 Bonus</span>
- <span>🎮 Games</span>
- <span>👤 Profile</span>
-</footer>
+
+<div class="hero">
+<h1>DAILY MISSIONS!</h1>
+<h3>Welcome to RLP Game</h3>
+<p>Play • Enjoy • Collect Points</p>
+</div>
+
+<div id="home">
+<h2>🔥 Popular Games</h2>
+<div class="card">
+<h1>🧠</h1>
+<h2>QUIZ CHALLENGE</h2>
+<p>सही जवाब देकर पॉइंट्स जीतें!</p>
+<button onclick="startQuiz()">PLAY NOW</button>
+</div>
+<div class="card">
+<h2>🎁 DAILY BONUS</h2>
+<p>डेमो बोनस सुविधा</p>
+<button onclick="bonus()">BONUS</button>
+</div>
+</div>
+
+<div id="quiz" class="card">
+<h2>🧠 RLP QUIZ</h2>
+<p id="progress">Question 1/10</p>
+<h3 id="question"></h3>
+<div id="answers"></div>
+<p id="feedback"></p>
+<button id="next" onclick="nextQuestion()" style="display:none">NEXT QUESTION</button>
+<div id="result"></div>
+<button id="restart" onclick="startQuiz()" style="display:none">PLAY AGAIN</button>
+<button onclick="goHome()">HOME</button>
+</div>
+
+<footer></footer>
+<nav>
+<a href="#" onclick="goHome()">🏠 Home</a>
+<a href="#" onclick="bonus()">🎁 Bonus</a>
+<a href="#" onclick="startQuiz()">🎮 Games</a>
+<a href="#" onclick="goHome()">👤 Profile</a>
+</nav>
+
 <script>
+const questions=[
+{q:"भारत की राजधानी कौनसी है?",a:["मुंबई","नई दिल्ली","जयपुर","भोपाल"],c:1},
+{q:"राजस्थान की राजधानी क्या है?",a:["जोधपुर","उदयपुर","जयपुर","अजमेर"],c:2},
+{q:"भारत का राष्ट्रीय पशु कौन है?",a:["शेर","बाघ","हाथी","घोड़ा"],c:1},
+{q:"भारत का राष्ट्रीय पक्षी कौन है?",a:["कबूतर","तोता","मोर","हंस"],c:2},
+{q:"सूर्य किस दिशा से निकलता है?",a:["पश्चिम","उत्तर","दक्षिण","पूर्व"],c:3},
+{q:"एक सप्ताह में कितने दिन होते हैं?",a:["5","6","7","8"],c:2},
+{q:"भारत का राष्ट्रीय फूल कौनसा है?",a:["गुलाब","कमल","चमेली","गेंदा"],c:1},
+{q:"पृथ्वी का उपग्रह कौन है?",a:["मंगल","चंद्रमा","सूर्य","शुक्र"],c:1},
+{q:"भारत का स्वतंत्रता दिवस कब है?",a:["15 अगस्त","26 जनवरी","2 अक्टूबर","14 नवंबर"],c:0},
+{q:"एक वर्ष में कितने महीने होते हैं?",a:["10","11","12","13"],c:2}
+];
+
+let index=0,score=0,answered=false;
+let points=Number(localStorage.getItem("rlpPoints")||1000);
+document.getElementById("points").textContent=points;
+
+function startQuiz(){
+index=0;score=0;
+document.getElementById("home").style.display="none";
+document.getElementById("quiz").style.display="block";
+document.getElementById("result").textContent="";
+document.getElementById("restart").style.display="none";
+showQuestion();
+}
+function showQuestion(){
+answered=false;
+let q=questions[index];
+document.getElementById("progress").textContent="Question "+(index+1)+"/"+questions.length;
+document.getElementById("question").textContent=q.q;
+document.getElementById("feedback").textContent="";
+document.getElementById("next").style.display="none";
+let box=document.getElementById("answers");
+box.innerHTML="";
+q.a.forEach((answer,i)=>{
+let b=document.createElement("button");
+b.className="option";
+b.textContent=answer;
+b.onclick=()=>checkAnswer(i);
+box.appendChild(b);
+});
+}
+function checkAnswer(choice){
+if(answered)return;
+answered=true;
+let correct=questions[index].c;
+let buttons=document.querySelectorAll(".option");
+buttons.forEach((b,i)=>{
+b.disabled=true;
+if(i===correct)b.style.border="3px solid #64ff85";
+});
+if(choice===correct){
+score+=50;
+points+=50;
+document.getElementById("feedback").textContent="🎉 सही जवाब! +50 पॉइंट्स";
+}else{
+document.getElementById("feedback").textContent="गलत जवाब! सही उत्तर: "+questions[index].a[correct];
+}
+document.getElementById("points").textContent=points;
+localStorage.setItem("rlpPoints",points);
+document.getElementById("next").style.display="inline-block";
+}
+function nextQuestion(){
+index++;
+if(index<questions.length){showQuestion();}
+else{
+document.getElementById("question").textContent="🏆 QUIZ COMPLETE!";
+document.getElementById("answers").innerHTML="";
+document.getElementById("feedback").textContent="";
+document.getElementById("next").style.display="none";
+document.getElementById("result").innerHTML="आपका स्कोर: "+score+" / 500 पॉइंट्स";
+document.getElementById("restart").style.display="inline-block";
+}
+}
+function goHome(){
+document.getElementById("quiz").style.display="none";
+document.getElementById("home").style.display="block";
+}
 function bonus(){
- let p=Number(document.getElementById('points').innerText);
- if(localStorage.getItem('rlpBonus')===new Date().toDateString()){
-  document.getElementById('message').innerText='Bonus already collected today!';
-  return;
- }
- p+=50;
- document.getElementById('points').innerText=p;
- localStorage.setItem('rlpBonus',new Date().toDateString());
- document.getElementById('message').innerText='50 points collected!';
+alert("RLP GAME: यह डेमो बोनस सुविधा है।");
 }
 </script>
 </body>
